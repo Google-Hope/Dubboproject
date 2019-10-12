@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="gx-web:war">
+    <output-path>$PROJECT_DIR$/gx-parent/gx-web/target</output-path>
+    <root id="archive" name="gx-web.war">
+      <element id="artifact" artifact-name="gx-web:war exploded" />
+    </root>
+  </artifact>
+</component>

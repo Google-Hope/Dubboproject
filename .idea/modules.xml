@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gx-parent/gx-dao/gx-dao.iml" filepath="$PROJECT_DIR$/gx-parent/gx-dao/gx-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gx-parent/gx-interface/gx-interface.iml" filepath="$PROJECT_DIR$/gx-parent/gx-interface/gx-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gx-parent/gx-parent.iml" filepath="$PROJECT_DIR$/gx-parent/gx-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gx-parent/gx-pojo/gx-pojo.iml" filepath="$PROJECT_DIR$/gx-parent/gx-pojo/gx-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gx-parent/gx-service/gx-service.iml" filepath="$PROJECT_DIR$/gx-parent/gx-service/gx-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gx-parent/gx-web/gx-web.iml" filepath="$PROJECT_DIR$/gx-parent/gx-web/gx-web.iml" />
+    </modules>
+  </component>
+</project>

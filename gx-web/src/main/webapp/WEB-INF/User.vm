@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ssm+dubbo+velocity</title>
+    <style>
+        .container-fluid {
+            width:100px;
+            height:90px;
+            float:left;
+            padding:5px;
+            margin:10px;
+
+        }
+        #changeDiv{
+            width:100px;
+            height:90px;
+            float:right;
+            padding:50px;
+            margin:10px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+
+    $(function () {
+        $("#addDiv").hide();
+        //添加user
+       $("#add").click(function () {
+           $("#addDiv").show();
+       })
+        //隐藏div
+        $("#submit").click(function () {
+
+            $("#addDiv").hide();
+        })
+        //删除
+        $("#delete").click(function () {
+            //获取userid
+         var userid=   $('input:checkbox:checked').val();
+
+            jQuery.post("deUser", {"userid":userid},function () {
+
+            },"json" );
+            window.location.reload();
+        });
+
+       //修改user
+        $("#change2").click(function () {
+            var userid=   $('input:checkbox:checked').val();
+
+            //回显示数据
+            jQuery.post("searchByid",{"userid":userid},function (data) {
+                var  User=data;
+                var emaill=User.emaill;
+                var userid=User.idd;
+             $("#username").val(User.username);
+                $("#password").val(User.password);
+                $("#email").val(emaill);
+                $("#userid").val(userid);
+                $("#username").val(User.username);
+
+            },"json");
+
+            // 打开一个修改的表单
+            //并且把id也放进去
+
+
+        })
+    })
+</script>
+</head>
+<body>
+      <center>
+##弹出的窗口
+<div id="addDiv"  class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <form class="form-inline" method="post" action="/addUser.action">
+                <fieldset>
+                    <legend>表单项</legend> <label>姓名：</label>
+
+                    <input type="text" name="username"/>
+<br/>
+                    <label>密码：</label><input type="text" name="password" /><br/>
+                    <label>性别：</label>
+                    <input type="radio" name="sex" value="0">男
+                    <input type="radio" name="sex" value="1">女
+
+                    <br/>
+                    <label>邮箱：</label><input type="text" name="email" /><br/>
+
+
+                </label> <button type="submit" id="submit" class="btn">提交</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    ##修改
+##弹出的窗口
+    <div id="changeDiv" class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <form class="form-inline" method="post" action="/changeUser.action">
+                    <fieldset>
+                        <legend>修改窗口</legend> <label>姓名：</label>
+                        <input type="hidden" id="userid" name="userid"/>
+                        <input type="text"  id="username" name="username"/>
+                        <br/>
+                        <label>密码：</label><input type="text" id="password" name="password" /><br/>
+                        <label>性别：</label>
+                        <input type="radio" name="sex" value="0" checked>男
+                        <input type="radio" name="sex" value="1">女
+
+                        <br/>
+                        <label>邮箱：</label><input type="text" id="email"  name="email" /><br/>
+
+
+                        </label> <button type="submit" id="submit" class="btn">提交</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div class="ibox-content col-md-12" style="padding-top: 0px; border: 0px; height: 100%; width: 100%">
+    <table class="table" id="filedTable">
+
+        <tr>
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">             选择√:</td>
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">用户名:</td>
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">密码:</td>
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">性别:</td>
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">邮箱:</td>
+
+        </tr>
+            <br>
+        #foreach($member in $allUsers)
+
+            <td width="32" align="center" bgcolor="#EFEFEF" Name="check">
+                    <input type="checkbox" name="checkbox" value="$!{member.userid}" / >
+            </td>
+
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">$!{member.username}</td>
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">$!{member.password}</td>
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">
+##添加if控制 如果是0就是male1就是famale
+    　 #if($!{member.sex}=="0")
+    男
+#else
+  女
+    　　 #end
+
+            </td>
+            <td width="162" bgcolor="#EFEFEF" Name="columnname" EditType="TextBox">$!{member.email}</td>
+            </br>
+               </tr> #end  
+    </table>
+      
+            <input type="button" name="Submit" id="add" value="添加" οnclick="AddRow(document.getElementById('filedTable'))"/>
+    <input type="button" id="delete" name="Submit2" value="删除" οnclick="DeleteRow(document.getElementById('filedTable'))"/>
+            <input type="button" name="Submit" id="change2" value="修改" οnclick="AddRow(document.getElementById('filedTable'))"/>
+</center>
+
+</div>
+</body>
+</html>
